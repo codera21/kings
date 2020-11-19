@@ -18,6 +18,13 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.5.5/css/simple-line-icons.min.css"
     />
 
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+
     <!-- Theme used for syntax highlighted code -->
     <link
       rel="stylesheet"
@@ -80,30 +87,35 @@
             </ul>
           </section>
           <!-- level 3 -->
-          <section>
-            <h3>Facts</h3>
-            <ul>
-              <p></p>
-              <li>
-                84% of organizations have an emergency communication plan in
-                place
-              </li>
-              <li>
-                55% of organizations have 3 or more emergency communication
-                processes
-              </li>
-            </ul>
-            <p></p>
-            <ul>
-              <li>49% have been engaged in crisis preparedness.</li>
-              <li>32% have engaged in crisis simulations or trainings</li>
-            </ul>
+          <section data-transition="zoom">
+            <div class="row">
+              <!-- chart 2 -->
+              <div class="col-4">
+                <small>At least 3 emergency communication plans ?</small>
+                <canvas id="chart2"></canvas>
+              </div>
+              <div class="col-4">
+                <small>Enganged in crisis preparedness plan</small>
+                <canvas id="chart3"></canvas>
+              </div>
+              <div class="col-4">
+                <small>Enganged in crisis simulations</small>
+                <canvas id="chart4"></canvas>
+              </div>
+            </div>
           </section>
         </section>
 
+        <!-- Slide 5 -->
+        <section>Before</section>
+        <!-- Slide 6 -->
+        <section>During</section>
+        <!-- Slide 7 -->
+        <section>After</section>
+
         <!-- Slide 4 -->
         <section>
-          <h3>General Layout of a Communication Plan.</h3>
+          <h3>General Layout of a Communication Plan</h3>
           <ol>
             <li>Introduction</li>
             <li>Contacts</li>
@@ -117,10 +129,91 @@
       </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script src="dist/reveal.js"></script>
     <script src="plugin/notes/notes.js"></script>
     <script src="plugin/markdown/markdown.js"></script>
     <script src="plugin/highlight/highlight.js"></script>
+
+    <!-- chart js code-->
+    <script>
+      var ctx = document.getElementById("chart2").getContext("2d");
+      var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: "doughnut",
+        // The data for our dataset
+        data: {
+          labels: ["yes", "no"],
+          datasets: [
+            {
+              data: [55, 45],
+
+              backgroundColor: ["rgb(255, 99, 132)", "rgb(255, 159, 64)"]
+            }
+          ]
+        },
+
+        // Configuration options go here
+        options: {
+          legend: {
+            display: false
+          }
+        }
+      });
+    </script>
+
+    <script>
+      var ctx = document.getElementById("chart3").getContext("2d");
+      var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: "doughnut",
+        // The data for our dataset
+        data: {
+          labels: ["yes", "no"],
+          datasets: [
+            {
+              data: [49, 51],
+
+              backgroundColor: ["rgb(255, 99, 132)", "rgb(255, 159, 64)"]
+            }
+          ]
+        },
+
+        // Configuration options go here
+        options: {
+          legend: {
+            display: false
+          }
+        }
+      });
+    </script>
+
+    <script>
+      var ctx = document.getElementById("chart4").getContext("2d");
+      var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: "doughnut",
+        // The data for our dataset
+        data: {
+          labels: ["yes", "no"],
+          datasets: [
+            {
+              data: [32, 68],
+
+              backgroundColor: ["rgb(255, 99, 132)", "rgb(255, 159, 64)"]
+            }
+          ]
+        },
+
+        // Configuration options go here
+        options: {
+          legend: {
+            display: false
+          }
+        }
+      });
+    </script>
+
     <script>
       // More info about initialization & config:
       // - https://revealjs.com/initialization/
