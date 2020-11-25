@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/league.css" id="theme" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="plugin/highlight/monokai.css"
+      id="highlight-theme"
+    />
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <!-- Slide 1-->
+        <section data-background-color="#2a1e5c">
+          <img
+            src="https://assets.grepsr.com/grepsr-homepage-v2/wp-content/themes/grepsr-v3/assets/img/logo-blue.svg"
+            alt=""
+            width="140"
+            height="36"
+            class="lazyloaded"
+            data-ll-status="loaded"
+          />
+          <h3>Adding Apify to your Arsenal</h3>
+          <h4>Atul N</h4>
+        </section>
+        
+        <!-- Slide 2-->
+        <section data-transition="slide" data-background-color="#2a1e5c">
+          <h3>Objectives</h3>
+          <p>A Journey of a thousand miles begins with a single step</p>
+          <p>
+            <img
+              src="../svg/undraw_moving_forward_lhhd.png"
+              width="150"
+              height="150"
+              style="border-radius: 25%"
+            />
+          </p>
+          <blockquote>Why Should I Use it?</blockquote>
+          <blockquote>Basic Setup</blockquote>
+          <blockquote>Common Use Cases</blockquote>
+        </section>
+
+        <!-- Slide 3-->
+        <section data-transition="slide" data-background-color="#2a1e5c">
+          <p>
+            <img
+              src="https://user-images.githubusercontent.com/10379601/29446482-04f7036a-841f-11e7-9872-91d1fc2ea683.png"
+              width="150"
+              height="150"
+              style="border-radius: 25%"
+            />
+          </p>
+          <div style="display: flex;">
+            <blockquote style="width: 50%; margin:0 .5em;">
+              Puppeteer has more control over Chrome's browsers than Selenium WebDriver.
+            </blockquote>
+            <blockquote style="width: 50%; margin:0 .5em">
+              Puppeteer scripting only available in JavaScript for Node.js, and unclear if other languages will be supported
+            </blockquote>
+
+          </div>
+          
+          
+        </section>
+
+        <!-- Slide 4 -->
+        <section data-auto-animate data-background-color="#2a1e5c">
+          <section>
+            <h3 data-id="code-title">Focus on your scraping logic</h3>
+            <p>
+              <img
+                src="../svg/undraw_dev_focus_b9xo.png"
+                alt=""
+                width="150"
+                height="150"
+                style="border-radius: 25%"
+              />
+            </p>
+            <blockquote> Automated Retires and switching Proxies </blockquote>
+          </section>
+
+          <section>
+            <pre
+              data-id="code-animation"
+            ><code class="hljs" data-trim data-line-numbers>
+						$try = 1;
+            do {
+                $inventories = pq('div')->count();
+                if ($inventories > 0) {
+                    break;
+                }
+                $try++;
+                $this->newSession();
+            } while ($try <= 3);
+          </code></pre>
+          <p>
+            <pre
+              data-id="code-animation"
+            ><code class="hljs" data-trim data-line-numbers>
+              options.maxRequestRetries = 2;
+              options.puppeteerPoolOptions.retireInstanceAfterRequestCount = 10;
+					</code></pre>
+          </p>
+          </section>
+
+          <section>
+            <pre
+              data-id="code-animation"
+            ><code class="hljs" data-trim data-line-numbers>
+              public function mainController($params)
+              {
+                  $proc = new Vtx_Service_Multi_Processor($this, __DIR__ . '/config.json');
+                  $dates = $params['input_sheet'];
+                  $totalProcess = 20;
+                  $total = count($dates);
+                  $limit = ceil($total / $totalProcess);
+                  $start = 0;
+                  $end = ($limit - 1);
+                  
+                  if ($total > 0) {
+                      while ($start <= $total) {
+                          while (!$proc->spawnProcess(['start' => $start, 
+                                      'end' => $end,
+                                      'input' => $input, 
+                                      'filename' => $filename)])
+                         {
+                              li("Processing $start to $end -- Total " . count($dates));
+                              //sleep(5);
+                          }
+                          $start = $end + 1;
+                          $end = $end + $limit;
+                      }
+                  }
+                  $proc->waitTasksCompletion();
+                  return $this;
+              }
+          </code></pre>
+          <p>
+            <pre
+              data-id="code-animation"
+            ><code class="hljs" data-trim data-line-numbers>
+              options.maxConcurrency = 5;
+            </code></pre>
+          </p>
+          </section>
+
+          <section>
+            <pre
+            data-id="code-animation"
+          ><code class="hljs" data-trim data-line-numbers>
+            await Apify.utils.enqueueLinks({
+              page,
+              requestQueue,
+              selector: 'a.product-detail',
+              pseudoUrls: ['https://www.example.com/handbags/[.*]'],
+            });
+
+            await requestQueue.addRequest({
+              url: `https://www.staples.com/`,
+              userData: { type: "listing" }
+            });
+          </code></pre>
+          </section>
+        </section>
+
+        <!-- Slide 5 -->
+        <section data-auto-animate data-background-color="#2a1e5c">
+            <h3>Basic Setup</h3>
+            <pre ><code style="max-height:500px" class="hljs" data-trim data-line-numbers>
+              const Apify = require('apify');
+
+              Apify.main(async () => {
+                  const requestQueue = await Apify.openRequestQueue();
+                  await requestQueue.addRequest({ 
+                    url: 'https://www.iana.org/'
+                   });
+                  const pseudoUrls = [
+                  new Apify.PseudoUrl('https://www.iana.org/[.*]')
+                  ];
+
+                  const crawler = new Apify.PuppeteerCrawler({
+                      requestQueue,
+                      handlePageFunction: async ({ request, page }) => {
+                          const title = await page.title();
+                          console.log(`${title}`);
+                          await Apify.utils.enqueueLinks({ 
+                            page, 
+                            selector: 'a', 
+                            pseudoUrls, 
+                            requestQueue 
+                        });
+                      },
+                      maxRequestsPerCrawl: 100,
+                      maxConcurrency: 10,
+                  });
+
+                  await crawler.run();
+              });
+          </code></pre>
+        </section>
+        <!-- Slide 6-->
+        <section data-auto-animate data-background-color="#2a1e5c">
+          <h3>Example</h3>
+          <p>
+            <a href="https://grepsr-apify-crawler.gitbook.io/grepsr-apify-crawler/examples">
+            Documentations</a>
+          </p>
+        </section>
+      </div>
+    </div>
+
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+      });
+    </script>
+  </body>
+</html>
